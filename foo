@@ -1,0 +1,15 @@
+.vimrc
+
+set number
+set tabstop=4
+set textwidth=0
+set backspace=indent,eol,start
+set ruler
+hi StatusLine ctermbg=none cterm=bold
+hi StatusLineNC ctermbg=0 cterm=none
+hi VertSplit ctermbg=0 ctermfg=0
+hi LineNr ctermfg=grey
+
+
+
+#!/bin/sh
