@@ -1,0 +1,200 @@
+wmic log folder> c:\windows\system32\wbem\logs\wmic.log
+wmic logicaldisk get deviceid, freespace, volumename
+termux
+timedate.cpl, ncpa.cpl
+
+unixlike>
+shift+pgup\down, ctrl+shift+up\down
+ctrl+u, ctrl+w, ctrl+k
+<anykey>+hold_ESC //show possible commands with <anykey>
+alt+F7 //move the window, alt+F8 //resize the window, alt+F9 //minimize the window, alt+F10 //maximize the window
+netstat --tcp udp -a, netstat --tcp --udp -c, netstat --tcp --udp -an, netstat -i, netstat -tuapcn, netstat -t4u4apc, netstat -s
+ifconfig, tcpdump, tcpkill, vnstat, fuser, ss, arp
+nethogs, nload, nload -t 500 -u K -i 3000 -o 512
+sudo ldconfig // after installing packages to load it
+cd, cd - //only cd will take you to home directory, and cd - will take you to last directory
+ls -al, \ls -al, ll, type ll, ls $PWD -d, ls --ignore=<anythingtoignore>, ls -1, ls Folders* -1d
+pwd,
+passwd //change the password of the current user
+cat, cat -n
+tabs 4 //will set 4 spaces for the terminal since cat doesnt control it
+file, file /foo/* --mime, file /foo/* --mime-type, file /foo/.* --mime
+mount //by itself will show all mounted filesystems
+dmesg
+lsblk //list block devices
+df, df -hT
+vmstat
+history
+top, top -d 1, top -d 0.5
+free
+pstree, pstree -c, pstree -c|grep <processname>
+ps, ps -ef, ps -ef|grep <processname>
+top|grep <processname>
+lsof
+mv
+cp
+cat /proc/cpuinfo
+uname
+grep, grep -i <processnameignoringcase>, grep -n <pattern> //show line numbers
+service
+kill, kill -9 <pid> (kill process using SIGKILL)
+apt-cache showpkg pkg1
+apt show pkg1
+dpkg
+echo -ne '\e[8;30;80t', echo -ne '\e[8;<height>;<width>t'
+readlink -e <file>
+amixer set Master 50%, amixer set Master 50, amixer scontrols
+alsamixer
+du -hs <file\folder>
+while true;do ls -1;sleep 1;done
+n=0;while((n++<5));do date;sleep 0.5;done
+for i in {1..5};do date;sleep 0.5;done
+for ((n=0;n<5;n++));do date;sleep 0.5;done
+nmcli dev wifi connect <ssid> password <password> iface wlan0
+nmcli con status
+nmcli con up id <ssid>
+nmcli dev disconnect iface wlan0
+nmcli dev wifi
+nmcli dev list //some macs
+nmcli con list id <ssid> //detailed info macs
+export PS1=' anything \$ ' //inside a .bashrc in the home directory, "source .bashrc" to load it
+anyCommand & //sends it to the background
+fg, jobs //brings back and jobs shows, both only in the same terminal that the command started
+sudo loadkeys br //kbd layout working on tty's
+ls | grep -i anything //search for a pattern ignoring the case
+ls *[aA][bB]* //ignoring the case
+echo "!!" //last command
+echo $(pwd) //show the result of the command
+echo "someComplicatedCommandFromHistory" //save it to a file if you want
+source txtFileWithCommand //run the command that you saved to a file using echo
+. txtFileWithCommand //run the command that you saved to a file using echo
+variableX="someComplicatedCommandFromHistory" //saves it to the variable
+eval $variableX //run the command saved inside the variable
+cowsay anything
+rsync //copy files
+printenv //all environment variables
+echo "asd">> //append to the end of a txt file
+1.txt >> 2.txt //there must be spaces between! append as well
+awk 'NR==3' someTxtFile //get the line 3 from some txt file
+awk NR==1 someTxtFile //get the line 1 from txt file
+awk 'NR>2&&NR<5' someTxtFile //get the lines 3 and 4 from some txt file
+sed -n '2,5p' //get from line 2 to line 5 of some file
+variableX=$(someComplicatedCommand) //result of the cmd goes to the variableX
+cd "$variableX" //cd to the path that's inside the variableX
+echo $variableX>>someTxtFile //append what's inside variableX to the txt file
+eval $(someComplicatedCommand) //run the result of someComplicatedCommand
+for i in P*;do echo $i;done //lists all files starting with P
+set|grep r[1-5] //shows some variables stored in the shell
+ctrl+shift+u +hexCode //useful to enter & for example, hexCode would be 26
+gucharmap //character map to get the hex codes
+echo $'\x41' //shows the char for the 41 hex code
+for a in path\ to\ some\ folder/*.code;do echo -e "\n$a";cat "$a" -n;done //cat every .code file from some directory
+stat someFile //check modification date
+stat -c %y
+wc -l someTxtFile //check how many lines there are in the file
+printf "%s\n" "$PWD"/* //show the files with the full path
+CTRL+r //on terminal will search hitory
+#comment //useful to put on commands and search for the comment with CTRL+r
+set -o vi //get vim commands in the terminal, ESQ will get to the normal mode
+ls -tr //show the newest files
+for a in {1..100};do echo "$a"; if lsof|grep 12312 >> Documents/log; then echo "found!";sleep .5;fi;done //log to file even if there's no result
+dpkg -l //list all the packages installed through the pkg manager
+while true;do ifconfig|grep bytes;sleep 1;done //network activity
+while true;do ifconfig wlan0|grep bytes|cut -c 30-39;sleep 1;done
+ifconfig wlan0|grep bytes|cut -d '(' -f 2|cut -d ' ' -f 1 //get down data, can change ( to :
+ifconfig wlan0|grep bytes|cut -d '(' -f 3|cut -d ' ' -f 1 //get up data, can change ( to :
+cat /etc/casper.conf, cat /etc/hostname, cat /etc/hosts
+netstat -s|awk 'NR>7&&NR<20' //get icmp data
+nmblookup -A <ip> //get hostname in the lan from ip
+dmidecode //data about hardware from bios
+sudo tcpdump -i wlan0 //get data on that interface
+for a in {1..100};do echo $a;b="echo $(lsof|grep 123)";if [ "$b" != "echo " ];then echo "found";echo "$b -$(date)" >> Documents/log;fi;sleep .5;done //if there's a result, log it
+for a in {1..100};do echo $a;b="$(lsof|grep 123)";if [ "$b" != "" ];then echo "found";printf "$b\n$(date)\n\n" >> Documents/log;fi;sleep .5;done
+(<writeMultiLineCommand>) //after ( type enter, indentation works
+PS1='\[\033[00m\]\u@\h\[\033[01;34m\] \w \$ \[\033[00m\]' //inside a .bashrc to change the user@host color in the terminal
+CTRL+K //erase the word on the right of the cursor, working on terminal
+w //shows users
+echo ${#someVar} //get the length of the variable
+sed 's/...$/Z&/' //inserts Z in the 3rd position starting from the end of line
+sed 's/a/A/4' //change letter a to A in position 4
+sed 's/.\{3\}/&Z/g' //inserts Z after every 3rd char
+thunar /path/to/media/file //run media <videos/audio/pdf/img/txt> without the output on terminal
+rsync --progress /source/file /destination/file //copy files with progress info
+man ascii //ascii table
+mv /path/do/file/name{,backup} //rename "name" to "namebackup"
+ls /usr/{,local}/share //list files in both /usr/share and /usr/local/share
+rename 's/a/qw/' * //rename all files and replace first instance of a with qw
+rename 's/a/qw/g' * //rename all files and replace every a with qw
+rename 's/asd/as/' * //remove the d from the names
+rename 's/.*tr/asd/' * //rename parts before of tr to asd, and keep what's after tr the same
+man 7 regex //some data about regex
+man -a regex //all man pages about regex
+sudo mount --bind /folder/from/mounted/partition /folder/to/appear //works like a symlink but not really, you mount a folder to another folder, useful when you dont have space for a task on a liveCD
+mkusb //have to install, but worked to make a persistent liveUSB with 6gb+ in /cow, worked from live xubuntu-17.10 installing a xubuntu-17.10 in 2017
+uname -a //get the kernel version
+lsb_release -a, cat /etc/lsb-release, cat /etc/issue.net, cat /etc/debian_version //get distro information
+crossover config{
+sudo ip addr add 192.168.2.1 peer 192.168.2.2 dev eth0
+sudo ip link set dev eth0 up
+
+sudo ip addr add 192.168.2.2 peer 192.168.2.1 dev eth0
+sudo ip link set dev eth0 up
+sudo ip route add default via 192.168.2.1}
+crossover config{
+nmcli device disconnect eth0
+sudo ip addr add 192.168.2.1/24 dev eth0
+
+nmcli device disconnect eth0
+sudo ip addr add 192.168.2.2/24 dev eth0
+
+OBS: if needed another eth0 connection, disconnect the crossover and nmcli con up id Wired\ Connection\ 1, the ip will change automatically, ifconfig eth0 to verify if needed}
+df -h --output='source','avail','used','pcent' //smaller df -h
+rsync --progress file_x user@host:~/folder/ //transfer a file using ssh
+rsync -r --progress folder_without_the_slash_after user@host:~/folder/ //transfer a folder using ssh, remove the / after the folder's name
+nc -l <port>|tar x //this on the receiving side, to transfer a file\folder
+tar cf - file_or_folder|nc <ip_address> <port> //this on the sending side, to transfer a file\folder
+python -m SimpleHTTPServer, or python3 -m http.server //start a httpserver on a folder to send it's contents through the network
+wget -r <ip_address>:<port>/folder_or_file //get the data to the current dir
+scp user@host:~/file ./place/to/store/the/file //transfer a file using ssh
+scp -r user@host:~/folder ./place/to/store/ //transfer a folder using ssh
+ssh user@host "cat ~/file" > new_file //transfer a file using ssh
+sudo -u <user> -i //start another user shell
+sudo adduser <user> //create another user
+sudo adduser <user> sudo //add user to sudo group, to be able to use sudo
+sudo userdel -r <user_name> //delete a user with it's files
+sudo hddtemp /dev/sd[a-z] //show hd temps
+sensors //show cpu temps
+sudo sensors-detect //search for more sensors to show
+xxd //hexdump of a file
+w //show some data about who is logged on
+some_command | awk 'BEGIN{FS="\n"}{print NR" "$1}' //show line numbers on output
+some_command | awk '{print NR" "$0}' //show line numbers on output
+some_command > log_$(date +%F_%T) //name the logs with the date and time
+tee //write to a file and stdout
+openssl rand -hex 6|sed 's/\(..\)/\1:/g; s/./0/2; s/.$//' //random mac address
+cat /usr/share/dict/words | grep ^<word>$ //dictionary on linuxmint
+ip link show //show network interface data
+rm $(ls -l|grep <user>|awk '{print $9}') //remove only the files from one user. WARNING=first check the ls -l|grep <user> if they are indeed from the user
+sed 's/a/&b/g' //will find the "a" pattern and place the same pattern again, done by the &, with a "b" after the "a"
+z1=$(cat -n <path_to_txt_file>|grep <pattern>|awk '{print $1}') && cat -n <path_to_txt_file>|awk 'NR>='$z1'&&NR<'$z1'+3' //find a pattern and print some lines after it as well
+cat -n <some_txt_file>|grep <pattern> -B 2 -A 3 //print 2 lines before the <pattern>, and 3 lines after the <pattern>
+sudo ls <path_to_dir>/"$(sudo ls <path_to_dir>|awk 'NR==<line_number_of_file>')" //access files that have a long name without having to type the name
+rename 'y/A-Z/a-z/' * //change all uppercase names to lowercase
+rename 's/$/a/' * //put an "a" at the end of the name of all files in the current dir
+rename 's/^/b/' * //put a "b" at the beginning of the name of all files in the current dir
+rename 's/a//; s/b//' * //remove the first "a" and "b" from the name of all files in the current dir, use 's/a//g; s/b//g' to apply to all a's and b's
+rename 's/^/a/; s/$/b/' * //put an "a" at the beginning and a "b" at the end of the name of all files in the current dir
+rename 's/a//; s/b//; s/^/c/' * //remove the first "a", "b" and put a "c" at the beginning of the name of all files in the current dir
+change mac{
+sudo ip link set dev eth0 down
+sudo ip link set dev eth0 address 11:22:33:44:55:66
+sudo ip link set dev eth0 up}
+chmod u+x <file_name> //change the executable bit of the <file_name>
+ctrl+shift+u <numbers> //on terminal it will show some character from it's code
+e=$(cat dbDesign3) && export e && python3 runSql.py designedDb.db e //running sql commands from file, the \n were giving problems for the executescript() in python, this way it works with \n in the file
+find <dir_path> -mtime 0 //search for files in the <dir_path> that have been modified in the last 24 hours
+comm -12 <(ls <dir_1_path>) <(ls <dir_2_path>) //print only files that are present on both directories
+for lineNumber in {1..1000}; do wget $(awk NR==$lineNumber txtFileWithURLs);done //download all urls that are present on some text file. NOTE: the number of iterations in the loop should be the number of lines in the file, in this case 1000
+ls *.pdf | wc -l //print the amount of files *.pdf in the current directory
+SHIFT+F10 = mouse right button
+

@@ -1,0 +1,42 @@
+#i was just copying and pasting these commands in the terminal. this messy file is just a place for me to remember them
+#bash commands to generate thousands of rows for the db, to test performance of the design of the software being developed.
+
+#testing on dbDesign7
+for i in {1..1000};do echo "insert into tb_price_category(pri_cat_description,pri_cat_notes) values('categoryDescription";done|awk -v q="'" '{print $0NR q ","q"notesFor"NR q");"}' > dbPopulateX #populate price categories all being active
+
+for i in {1..800};do echo "insert into tb_price_category(pri_cat_description,pri_cat_notes,pri_cat_active) values('categoryDescription";done|awk -v q="'" '{print $0NR q ","q"notesFor"NR q","NR%2");"}' > dbPopulateX #populate price categories half being active
+
+for i in {1..1000};do echo "insert into tb_price(pri_amount_of_days,pri_price,pri_tb_price_category_id) values(";done|awk '{print $0NR "," NR ",2141241);"}' > dbPopulateX #populate prices without a category
+
+for i in {1..1000};do echo "insert into tb_price(pri_amount_of_days,pri_price,pri_tb_price_category_id) values(";done|awk '{print $0NR "," NR "," NR ");"}' > dbPopulateX #populate prices with a category
+
+
+#non dependent on dbDesign
+for i in {1..5};do echo "cityName";done | awk '{print $0NR}' > cityNamesFile #generate city names
+cat cityNamesFile | awk '{print "some sql command here "$0}' > dbPopulateX #generate sql commands to insert the city names into the db
+:%s/^.\{0,4}// #and then :g/^\s*$/d #inside vim, to remove spaces and first alphabet letter that separates the city names that i got from wiki
+
+
+#testing on dbDesign8
+for i in {1..5};do echo "insert into tb_address(add_neighborhood, add_tb_city_id) values('neighborhood";done|awk -v q="'" '{print $0NR q ", 1);"}' > dbPopulateX #populate tb_address
+
+for i in {1..5};do echo "insert into tb_client(cli_first_name, cli_cpf, cli_date_of_birth, cli_date_of_admission, cli_tb_address_id) values('name";done|awk -v q="'" '{print $0NR q "," q "cpf1" q "," q "dob 1" q "," q "doa 1" q "," NR ");"}' > dbPopulateX #populate tb_client
+
+#generate sql to populate the db with words from a txt file
+
+cat american-english | awk '{print "some sql code(" $0 ") some more sql(foo);"}' #also printing " ' "
+
+cat american-english | awk -v q="'" '{print "insert into tb_client(cli_first_name, cli_cpf, cli_date_of_birth, cli_date_of_admission, cli_tb_address_id) values(" q $0 q ", " q "cpf1" q ", " q "dob 1" q ", " q "doa 1" q ", 1);"}' > dbPopulateDict1 #creating clients with dict words, contains quotes
+
+cat american-english | sed 's/[^a-z]//g' | awk -v q="'" '{print "insert into tb_client(cli_first_name, cli_cpf, cli_date_of_birth, cli_date_of_admission, cli_tb_address_id) values(" q $0 q ", " q "cpf1" q ", " q "dob 1" q ", " q "doa 1" q ", 1);"}' > dbPopulateDict1 #creating clients using dict words with only [a-z], no spaces #USE FIRST 1300* LINES
+
+cat american-english | sed 's/[^a-z]//g' | awk -v q="'" '{print "insert into tb_client(cli_first_name, cli_cpf, cli_date_of_birth, cli_date_of_admission, cli_tb_address_id) values(" q $0 q ", " q "cpf1" q ", " q "dob 1" q ", " q "doa 1" q ", " NR ");"}' > dbPopulateDict1 #creating clients using dict words with only [a-z], no spaces #USE FIRST 1300* LINES #using NR addresses
+
+cat parana_state_file_with_city_names | awk -v q="'" '{print "insert into tb_city(cit_name, cit_tb_state_id) values(" q $0 q ", 1);"}' > dbPopulateParana #populate the db with the city names for the state of parana, the parana state i put in the db first and saw that the state id was 1, so i can do the same for all the other states, i just need to see the id that the state got in the db and put it in the sql string with all the city names of that state
+
+
+#testing on dbDesign9
+for i in {1..5};do echo "insert into tb_client(cli_first_name, cli_cpf, cli_date_of_birth, cli_date_of_admission) values('name";done|awk -v q="'" '{print $0NR q "," q "cpf1" q "," q "dob 1" q "," q "doa 1" q ");"}' > dbPopulateX #populate tb_client
+
+for i in {1..5};do echo "insert into tb_address(add_neighborhood, add_tb_city_id, add_tb_client_id) values('neighborhood";done|awk -v q="'" '{print $0NR q ", 1, " NR ");"}' > dbPopulateX #populate tb_address
+
