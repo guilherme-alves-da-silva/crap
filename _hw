@@ -1,0 +1,22 @@
+
+sudo service mysql start
+https://dba.stackexchange.com/questions/73430/creating-a-database-with-only-mysql-command-line
+https://stackoverflow.com/questions/10895163/how-to-find-out-the-mysql-root-password
+
+$ mysql -u root
+
+mysql> UPDATE mysql.user SET Password=PASSWORD('password') WHERE User='root';
+
+
+sudo mysqldump -u root -p db3 tb2 tb3 > Documents/db3_dump1_tables.sql
+
+
+#!/bin/sh
+
+sudo chmod u+x <file>
+
+
+crontab -e
+@reboot echo "ran from sudo crontab -e" >> /path/dump1
+
+
